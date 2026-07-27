@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>内容评测工具中心 — 五合一工具集</title>
+<style>
+:root {
+  --bg: #f6f7fb;
+  --card: #fff;
+  --text: #1f2937;
+  --sub: #6b7280;
+  --border: #e5e7eb;
+  --ts-primary: #2563eb;
+  --ts-secondary: #7c3aed;
+  --au-primary: #667eea;
+  --au-secondary: #764ba2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 0 20px 60px;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 48px 20px 36px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 10px;
+}
+.hero .subtitle {
+  color: var(--sub);
+  font-size: 16px;
+}
+.hero .badge-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.hero .badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-purple { background: #ede9fe; color: #6d28d9; }
+
+/* Tool Grid */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 960px;
+  margin: 0 auto 48px;
+}
+
+.tool-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.tool-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+.tool-card .icon {
+  font-size: 40px;
+  margin-bottom: 4px;
+}
+.tool-card h3 {
+  font-size: 17px;
+  color: #111827;
+}
+.tool-card p {
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.5;
+  flex: 1;
+}
+.tool-card .card-tags {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tool-card .card-tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Bookmarklet buttons */
+a.bm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: grab;
+  user-select: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  transition: transform .12s;
+  white-space: nowrap;
+}
+a.bm-btn:active { cursor: grabbing; transform: scale(.97); }
+a.bm-btn.ts { color: #fff; background: linear-gradient(135deg, var(--ts-primary), var(--ts-secondary)); }
+a.bm-btn.au { color: #fff; background: linear-gradient(135deg, var(--au-primary), var(--au-secondary)); }
+a.bm-btn.pf { color: #fff; background: linear-gradient(135deg, #0071e3, #0060c0); }
+a.bm-btn.pt { color: #fff; background: linear-gradient(135deg, #2db84d, #1a9e36); }
+a.bm-btn.un { color: #fff; background: linear-gradient(135deg, #7c3af7, #6d28d9); }
+
+/* Web tool link button (non-bookmarklet) */
+a.web-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3af7, #6d28d9);
+  box-shadow: 0 4px 12px rgba(124,58,247,.3);
+  transition: transform .12s;
+}
+a.web-link:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(124,58,247,.4); }
+
+/* Detail Sections */
+.wrap { max-width: 860px; margin: 0 auto; }
+.tool-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+.tool-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.tool-section .section-header .s-icon { font-size: 28px; }
+.tool-section .section-header h2 {
+  font-size: 20px;
+  color: #111827;
+}
+.tool-section .section-header .ver {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.ver-ts { background: #dbeafe; color: #1d4ed8; }
+.ver-kz { background: #e8ecff; color: #4338ca; }
+.ver-au { background: #dcfce7; color: #166534; }
+
+.tool-section .desc {
+  color: var(--sub);
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+/* Feature grid */
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+@media (max-width: 560px) { .feat-grid { grid-template-columns: 1fr; } }
+.feat-item {
+  padding: 10px 14px;
+  background: #f8f9fc;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.feat-item strong { display: block; color: #333; margin-bottom: 2px; font-size: 12.5px; }
+.feat-item .feat-desc { color: #718096; font-size: 12px; }
+
+/* Install block */
+.install-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f8f9fc;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.install-block .install-hint {
+  color: var(--sub);
+  font-size: 13px;
+}
+.install-warn {
+  padding: 12px 16px;
+  background: #fffbeb;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  color: #92400e;
+  margin-bottom: 16px;
+}
+
+/* Steps */
+.steps { list-style: none; }
+.steps li {
+  padding: 6px 0 6px 28px;
+  position: relative;
+  color: var(--sub);
+  font-size: 13px;
+}
+.steps li::before {
+  content: counter(step);
+  counter-increment: step;
+  position: absolute;
+  left: 0; top: 6px;
+  width: 20px; height: 20px;
+  background: #e8ecff;
+  color: #4361ee;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ol.steps { counter-reset: step; }
+
+/* Demo area */
+.demo-area {
+  padding: 16px;
+  background: #f0f4ff;
+  border-radius: 8px;
+  border: 1px dashed #c7d2fe;
+  font-size: 13px;
+  color: #4338ca;
+  margin-top: 12px;
+}
+
+/* Filter list */
+.filter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+@media (max-width: 560px) { .filter-grid { grid-template-columns: 1fr; } }
+.filter-item {
+  padding: 8px 12px;
+  background: #fef2f2;
+  border-radius: 6px;
+  font-size: 12.5px;
+}
+.filter-item .no { color: #dc2626; font-weight: 600; }
+
+/* Compare table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 13px;
+}
+.compare-table th, .compare-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.compare-table th {
+  background: #f8f9fc;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table .check { color: #16a34a; font-weight: 600; }
+
+/* Nav */
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 0 40px;
+  flex-wrap: wrap;
+}
+.nav-bar a {
+  padding: 6px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--sub);
+  font-size: 13px;
+  transition: all .15s;
+}
+.nav-bar a:hover {
+  background: #f0f4ff;
+  border-color: #c7d2fe;
+}
+
+code {
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+}
+kbd {
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>🛠 内容评测工具中心</h1>
+  <p class="subtitle">五个实用工具，覆盖评测工作全流程</p>
+  <div class="badge-row">
+    <span class="badge badge-green">免安装扩展</span>
+    <span class="badge badge-blue">拖拽即用</span>
+    <span class="badge badge-purple">Chrome/Safari/Firefox/Edge</span>
+  </div>
+</div>
+
+<!-- Quick Install Cards -->
+<div class="tool-grid" id="top">
+  <div class="tool-card">
+    <div class="icon">⏱️</div>
+    <h3>时间戳就地转换</h3>
+    <p>选中任意页面上的 Unix 时间戳（秒/毫秒）或 ISO 日期，自动弹气泡显示可读时间</p>
+    <div class="card-tags">
+      <span class="card-tag" style="background:#dbeafe;color:#1d4ed8">时间戳</span>
+      <span class="card-tag" style="background:#ede9fe;color:#6d28d9">Bookmarklet</span>
+      <span class="card-tag" style="background:#fce7f3;color:#9d174d">扩展版</span>
+    </div>
+    <a class="bm-btn ts" id="bm-ts" href="#">⏱ 时间戳转换</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="icon">🔗</div>
+    <h3>可替代URL提取</h3>
+    <p>识别 10 种信号源的替代 URL，智能过滤 RSS/API 等噪音，一键打开或复制</p>
+    <div class="card-tags">
+      <span class="card-tag" style="background:#dbeafe;color:#1d4ed8">10种信号</span>
+      <span class="card-tag" style="background:#dcfce7;color:#166534">智能过滤</span>
+    </div>
+    <a class="bm-btn au" id="bm-au" href="#">🔍 可替代URL提取</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="icon">📄</div>
+    <h3>PDF Finder</h3>
+    <p>在论文页面一键提取 PDF 下载链接，支持 Springer / Elsevier / ACM / arXiv 等主流出版商</p>
+    <div class="card-tags">
+      <span class="card-tag" style="background:#dbeafe;color:#1d4ed8">自动更新</span>
+      <span class="card-tag" style="background:#dcfce7;color:#166534">8+出版商</span>
+    </div>
+    <a class="bm-btn pf" id="bm-pf" href="#">📄 PDF Finder</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="icon">🕐</div>
+    <h3>发布时间提取</h3>
+    <p>从网页源码 7 层策略提取发布时间，支持 meta/JSON-LD/script/正则等，自动转北京时间</p>
+    <div class="card-tags">
+      <span class="card-tag" style="background:#dcfce7;color:#166534">7层策略</span>
+      <span class="card-tag" style="background:#dbeafe;color:#1d4ed8">自动更新</span>
+    </div>
+    <a class="bm-btn pt" id="bm-pt" href="#">🕐 Publish Time</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="icon">🔗</div>
+    <h3>URL 智能归一化</h3>
+    <p>输入 URL，智能评分每个参数（核心/可选/追踪），生成 4 种归一化方案，iframe 并排预览对比</p>
+    <div class="card-tags">
+      <span class="card-tag" style="background:#ede9fe;color:#6d28d9">网页工具</span>
+      <span class="card-tag" style="background:#dcfce7;color:#166534">智能评分</span>
+      <span class="card-tag" style="background:#fef3c7;color:#92400e">规则学习</span>
+    </div>
+    <a class="web-link" href="https://miawu423-sketch.github.io/url-normalizer/url-normalizer.html" target="_blank">🔗 打开 URL 归一化 →</a>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav-bar">
+  <a href="#tool-ts">⏱ 时间戳</a>
+  <a href="#tool-au">🔗 替代URL</a>
+  <a href="#tool-pf">📄 PDF Finder</a>
+  <a href="#tool-pt">🕐 发布时间</a>
+  <a href="#tool-un">🔗 URL归一化</a>
+  <a href="#compare">📊 五工具对比</a>
+</div>
+
+<!-- ================================ -->
+<!-- Tool 1: 时间戳转换 -->
+<!-- ================================ -->
+<div class="wrap">
+  <div class="tool-section" id="tool-ts">
+    <div class="section-header">
+      <span class="s-icon">⏱️</span>
+      <h2>时间戳就地转换</h2>
+      <span class="ver ver-ts">Bookmarklet + 网页版 + 扩展版</span>
+    </div>
+    <p class="desc">
+      在任意网页上选中文本，自动识别其中的 Unix 时间戳（秒/毫秒）或常见日期格式，在选区旁弹出气泡显示 <code>yyyy/MM/dd HH:mm:ss</code> 格式的可读时间。支持格式切换、时区选择、一键复制。
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-item">
+        <strong>✓ 四种时间戳格式</strong>
+        <span class="feat-desc">Unix 秒（10位）、毫秒（13位）、ISO 8601、yyyy-MM-dd HH:mm:ss</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 气泡就地展示</strong>
+        <span class="feat-desc">选中文字后选区旁自动弹气泡，不切页面，点击即复制</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 格式/时区可选</strong>
+        <span class="feat-desc">气泡内置下拉切换：5种显示格式 + 本地/UTC/±N 时区</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 双版本覆盖</strong>
+        <span class="feat-desc">Bookmarklet 版（零门槛）+ Chrome 扩展版（CSP 受限页面也可用）</span>
+      </div>
+    </div>
+
+    <div class="install-block">
+      <a class="bm-btn ts" id="bm-ts2" href="#">⏱ 时间戳转换</a>
+      <div class="install-hint">← 按住按钮，拖到浏览器书签栏即可安装</div>
+    </div>
+    <div class="install-warn">
+      ⚠️ 直接点击按钮不会安装，必须<b>拖拽</b>到书签栏。如果书签栏没显示：Chrome/Edge <kbd>⌘+Shift+B</kbd>，Safari「显示 → 个人收藏栏」。
+    </div>
+
+    <div style="font-weight:600; color:#333; margin-bottom:8px; font-size:14px;">使用方法</div>
+    <ol class="steps">
+      <li>打开任意网页（日志系统、监控面板、聊天记录均可）</li>
+      <li>点击书签栏的「⏱ 时间戳转换」，页面右下角出现绿色提示表示已启用</li>
+      <li>鼠标划中一段含时间戳的文字（如 <code>1721028573</code>）</li>
+      <li>选区旁自动弹气泡，显示转换结果；点击时间可复制</li>
+      <li>再次点击书签 = 关闭；页面刷新后需重新点击启用</li>
+    </ol>
+
+    <div class="demo-area">
+      试试选中这段文字：<code>created_at: 1721028573, updated: 1721028573123, since 2024-07-15T10:49:33Z</code>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+    <!-- Tool 2: 可替代URL -->
+
+  <!-- ================================ -->
+  <div class="tool-section" id="tool-au">
+    <div class="section-header">
+      <span class="s-icon">🔗</span>
+      <h2>可替代URL源码提取</h2>
+      <span class="ver ver-au">v2.0 智能过滤版</span>
+    </div>
+    <p class="desc">
+      一键提取当前网页源码中所有可替代 URL 线索，自动过滤 RSS/API/JSON 等噪音链接，只保留能在浏览器中正常打开的网页 URL。支持<strong> 10 种信号来源</strong>，中英文网页通用。
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-item">
+        <strong>✓ 10 种信号源</strong>
+        <span class="feat-desc">canonical、og:url、data-*属性、alternate、百度移动适配、JSON-LD、正文来源文字、AMP、shortlink、syndication</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 智能过滤噪音</strong>
+        <span class="feat-desc">自动排除 RSS/feed、WP REST API、oEmbed、JSON/XML、iCal、trackback 等</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 一键操作</strong>
+        <span class="feat-desc">单条打开/复制、全部打开/复制，复制有 ✓ 反馈</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 中英文通用</strong>
+        <span class="feat-desc">识别「来源：」「转载自：」「原文链接：」等中文来源标注</span>
+      </div>
+    </div>
+
+    <div class="install-block">
+      <a class="bm-btn au" id="bm-au2" href="#">🔍 可替代URL提取</a>
+      <div class="install-hint">← 拖到书签栏即可安装</div>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin-bottom:8px; font-size:14px;">使用方法</div>
+    <ol class="steps">
+      <li><strong>拖拽安装</strong>：将紫色按钮拖到浏览器书签栏</li>
+      <li><strong>点击书签</strong>：在任意网页上点击书签栏中的「🔍 可替代URL源码提取」</li>
+      <li><strong>查看结果</strong>：右侧弹出面板，列出所有识别到的替代 URL（已自动过滤噪音）</li>
+      <li><strong>操作 URL</strong>：点击「打开」在新标签页查看，点击「复制」复制单条，或使用底部按钮全部操作</li>
+    </ol>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">智能过滤规则</div>
+    <div class="filter-grid">
+      <div class="filter-item"><span class="no">✕</span> RSS/Atom 订阅源 <code>/feed/</code></div>
+      <div class="filter-item"><span class="no">✕</span> WordPress REST API <code>/wp-json/</code></div>
+      <div class="filter-item"><span class="no">✕</span> oEmbed 嵌入接口</div>
+      <div class="filter-item"><span class="no">✕</span> 评论订阅 <code>/comments/feed</code></div>
+      <div class="filter-item"><span class="no">✕</span> JSON/XML/iCal 数据接口</div>
+      <div class="filter-item"><span class="no">✕</span> 日历订阅 <code>?ical=1</code> / <code>.ics</code></div>
+      <div class="filter-item"><span class="no">✕</span> 嵌入/打印版 <code>/embed/</code> <code>/print/</code></div>
+      <div class="filter-item"><span class="no">✕</span> EditURI/trackback/wlwmanifest 等技术链接</div>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">识别的 10 种信号来源</div>
+    <div class="filter-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">canonical 标签</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">og:url 元数据</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">data-* 自定义属性</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">alternate 页面版本</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">百度移动适配</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">JSON-LD 结构化数据</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">正文来源文字</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">AMP 版本</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">shortlink</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">syndication-source</div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- Tool 3: PDF Finder -->
+  <!-- ================================ -->
+  <div class="tool-section" id="tool-pf">
+    <div class="section-header">
+      <span class="s-icon">📄</span>
+      <h2>PDF Finder</h2>
+      <span class="ver ver-ts">v4 远程更新版</span>
+    </div>
+    <p class="desc">
+      在论文页面一键提取本文 PDF 下载链接。支持 <strong>Springer/Nature、Elsevier/ScienceDirect、Wiley、ACM、IEEE、MDPI/Frontiers、arXiv、Taylor & Francis/SAGE</strong> 等主流出版商，智能过滤推荐文章的 PDF，只保留本文。
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-item">
+        <strong>✓ 多出版商支持</strong>
+        <span class="feat-desc">覆盖 Springer、Elsevier、Wiley、ACM、IEEE、arXiv、MDPI 等</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 智能过滤</strong>
+        <span class="feat-desc">PII 匹配过滤推荐文章 PDF，只保留本文。付费文章自动标注</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 标签区分</strong>
+        <span class="feat-desc">meta（绿色，本文最可靠）、link（蓝色，页面扫描）、订阅提醒（黄色）</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 远程自动更新</strong>
+        <span class="feat-desc">每次点击从 GitHub Pages 拉取最新 JS，更新完全自动</span>
+      </div>
+    </div>
+
+    <div class="install-block">
+      <a class="bm-btn pf" id="bm-pf2" href="#">📄 PDF Finder</a>
+      <div class="install-hint">← 拖到书签栏即可安装。每次点击自动获取最新版本。</div>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin-bottom:8px; font-size:14px;">使用方法</div>
+    <ol class="steps">
+      <li><strong>打开论文页面</strong>：进入任意支持出版商的论文详情页</li>
+      <li><strong>点击书签</strong>：点击书签栏中的「📄 PDF Finder」</li>
+      <li><strong>查看 PDF 链接</strong>：浮窗显示找到的 PDF 链接，优先级从高到低排列</li>
+      <li><strong>一键下载</strong>：点击链接直接打开 PDF</li>
+    </ol>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">结果标签说明</div>
+    <div style="overflow-x:auto;">
+    <table class="compare-table">
+      <tr><th>标签</th><th>含义</th></tr>
+      <tr><td><span style="background:#34c759;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;">meta</span> 本文</td><td>本文的 PDF 直链，最可靠</td></tr>
+      <tr><td><span style="background:#0071e3;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;">link</span></td><td>页面扫描到的 PDF 链接</td></tr>
+      <tr><td><span style="background:#fff3cd;color:#856404;border:1px solid #ffc107;padding:2px 8px;border-radius:4px;font-size:12px;">可能需要订阅</span></td><td>付费文章，需登录后访问</td></tr>
+    </table>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">支持的出版商</div>
+    <div class="filter-grid" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">Springer/Nature</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">Elsevier/ScienceDirect</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">Wiley</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">ACM</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">IEEE</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">MDPI/Frontiers</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">arXiv</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">Taylor & Francis/SAGE</div>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- Tool 4: 发布时间提取 -->
+  <!-- ================================ -->
+  <div class="tool-section" id="tool-pt">
+    <div class="section-header">
+      <span class="s-icon">🕐</span>
+      <h2>发布时间提取</h2>
+      <span class="ver ver-au">v3 7层策略版</span>
+    </div>
+    <p class="desc">
+      从网页源码中 <strong>7 层策略</strong> 依次提取文章发布时间，所有结果统一转换为北京时间。优先取 <code>dateModified</code>（更新时间），对于头条等推荐平台自动跳过不可靠的修改时间。最佳结果自动复制到剪贴板。
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-item">
+        <strong>✓ 7 层提取策略</strong>
+        <span class="feat-desc">Meta 标签 → JSON-LD → Script 变量 → Time 标签 → Data 属性 → Class/ID 模式 → 正则正文</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 智能偏好更新时间</strong>
+        <span class="feat-desc">优先取 dateModified；头条/百度/网易等推荐平台自动识别并跳过不可靠的修改时间</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 统一北京时间</strong>
+        <span class="feat-desc">所有输出自动转北京时间，支持 ISO 8601 / 中文日期 / Unix 时间戳 / RFC 2822 等格式</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 远程自动更新</strong>
+        <span class="feat-desc">每次点击从 GitHub Pages 拉取最新 JS，策略优化无需重装书签</span>
+      </div>
+    </div>
+
+    <div class="install-block">
+      <a class="bm-btn pt" id="bm-pt2" href="#">🕐 Publish Time</a>
+      <div class="install-hint">← 拖到书签栏即可安装。每次点击自动获取最新版本。</div>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin-bottom:8px; font-size:14px;">使用方法</div>
+    <ol class="steps">
+      <li><strong>打开目标网页</strong>：打开任意文章页面（新闻、博客、论文均可）</li>
+      <li><strong>点击书签</strong>：点击书签栏中的「🕐 Publish Time」</li>
+      <li><strong>查看结果</strong>：右侧弹出面板，7 层策略结果按精度从高到低排列</li>
+      <li><strong>自动复制</strong>：最佳结果（绿色高亮）自动复制到剪贴板，直接粘贴使用</li>
+    </ol>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">7 层提取策略详情</div>
+    <div style="overflow-x:auto;">
+    <table class="compare-table">
+      <tr><th>层级</th><th>策略</th><th>来源示例</th></tr>
+      <tr><td>1</td><td><strong>Meta 标签</strong></td><td><code>article:published_time</code>, <code>pubdate</code>, <code>dc.date.issued</code>, <code>sailthru.date</code> 等 20+ 种</td></tr>
+      <tr><td>2</td><td><strong>JSON-LD 解析</strong></td><td><code>datePublished</code>, <code>dateModified</code>, 递归查找 <code>@graph</code>/<code>mainEntity</code></td></tr>
+      <tr><td>3</td><td><strong>Script 变量</strong></td><td><code>"created_at"</code>, <code>"publishTime"</code>, <code>"time"</code> key, <code>/Date(ms)/</code> 等</td></tr>
+      <tr><td>4</td><td><strong>Time 标签</strong></td><td><code>&lt;time datetime="..."&gt;</code></td></tr>
+      <tr><td>5</td><td><strong>Data 属性</strong></td><td><code>data-publish-time</code>, <code>data-pubtime</code>, <code>data-timestamp</code> 等</td></tr>
+      <tr><td>6</td><td><strong>Class/ID 模式</strong></td><td>包含 <code>publish*time</code>, <code>post*time</code>, <code>date</code> 等关键字的元素</td></tr>
+      <tr><td>7</td><td><strong>正则正文匹配</strong></td><td>「发布时间：」「发布于」「更新于」后跟日期时间</td></tr>
+    </table>
+    </div>
+
+    <div class="demo-area">
+      支持的格式：<code>2024-07-15T10:49:33Z</code> · <code>2024年7月15日 10:49</code> · <code>1721028573</code>（Unix秒） · <code>Sun, 09 Mar 2025 22:21:38 +0900</code> · <code>/Date(1721028573000+0800)/</code>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- Tool 5: URL 智能归一化 -->
+  <!-- ================================ -->
+  <div class="tool-section" id="tool-un">
+    <div class="section-header">
+      <span class="s-icon">🔗</span>
+      <h2>URL 智能归一化</h2>
+      <span class="ver" style="background:#ede9fe;color:#6d28d9">网页工具</span>
+    </div>
+    <p class="desc">
+      输入任意 URL，自动解析所有参数并<strong>智能评分</strong>（核心/可选/追踪），生成 4 种归一化方案，<strong>iframe 并排预览</strong>对比各方案的实际页面效果。支持自定义规则学习、ClearURLs 追踪参数库集成、穷举模式。
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-item">
+        <strong>✓ 两种分析模式</strong>
+        <span class="feat-desc">智能模式（参数≥6，规则库+语义评分） / 穷举模式（参数≤5，N+1方案逐个测试）</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 参数智能评分</strong>
+        <span class="feat-desc">域名白名单 + 语义分析：核心参数（id/v/q）得分3，追踪参数（utm_*/fbclid）得分0</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 4 种归一化方案</strong>
+        <span class="feat-desc">删除所有 / 仅核心 / 核心+可选 / 仅删追踪，自动排序推荐</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ iframe 并排预览</strong>
+        <span class="feat-desc">原始 URL 和所有方案在 iframe 网格中并排加载，直观对比哪个方案最优</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 规则学习系统</strong>
+        <span class="feat-desc">上传原始→归一化配对数据，自动提取域名级/路径级规则，持久化到 localStorage</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ ClearURLs 集成</strong>
+        <span class="feat-desc">在线获取追踪参数黑名单，加载失败自动降级到内置规则</span>
+      </div>
+    </div>
+
+    <div class="install-block">
+      <a class="web-link" href="https://miawu423-sketch.github.io/url-normalizer/url-normalizer.html" target="_blank">🔗 打开 URL 归一化工具 →</a>
+      <div class="install-hint">← 点击按钮在新标签页打开（纯网页工具，非书签）</div>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin-bottom:8px; font-size:14px;">使用流程</div>
+    <ol class="steps">
+      <li><strong>输入 URL</strong>：粘贴任意带参数的 URL（如搜索结果、分享链接、追踪链接）</li>
+      <li><strong>选择模式</strong>：参数多选智能分析，参数少选穷举测试</li>
+      <li><strong>查看评分</strong>：每个参数标注重要性（<span style="color:#16a34a;font-weight:600">核心</span> / <span style="color:#d97706;font-weight:600">可选</span> / <span style="color:#dc2626;font-weight:600">追踪</span>）</li>
+      <li><strong>对比预览</strong>：iframe 并排展示原始和归一化版本，确认页面正常且 URL 最简洁</li>
+      <li><strong>导出规则</strong>：确认方案后，可导出规则供下次复用</li>
+    </ol>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">参数评分机制</div>
+    <div style="overflow-x:auto;">
+    <table class="compare-table">
+      <tr><th>得分</th><th>类别</th><th>示例参数</th></tr>
+      <tr><td>3 分</td><td><strong>核心参数</strong></td><td><code>id</code>, <code>v</code>, <code>q</code>, <code>p</code>, <code>pid</code>, <code>aid</code>, <code>cid</code>, <code>token</code></td></tr>
+      <tr><td>2 分</td><td><strong>可选参数</strong></td><td><code>lang</code>, <code>locale</code>, <code>t</code></td></tr>
+      <tr><td>1 分</td><td><strong>未知/单字母</strong></td><td><code>a</code>, <code>b</code>, <code>x</code></td></tr>
+      <tr><td>0 分</td><td><strong>追踪参数</strong></td><td><code>utm_source</code>, <code>utm_medium</code>, <code>fbclid</code>, <code>gclid</code>, <code>ref</code>, <code>spm</code>, <code>trackid</code></td></tr>
+    </table>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">4 种归一化方案</div>
+    <div class="filter-grid" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;"><strong>方案 A</strong>：删除所有参数</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;"><strong>方案 B</strong>：仅保留核心参数</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;"><strong>方案 C</strong>：核心+可选参数</div>
+      <div class="filter-item" style="background:#fef2f2;color:#991b1b;"><strong>方案 D</strong>：仅删除追踪参数</div>
+    </div>
+
+    <div class="install-block" style="margin-top:20px;background:#f0f4ff;">
+      <span style="font-size:14px;color:#4338ca;">💡 这是唯一一个<b>非书签</b>工具——直接在网页中操作，适合需要仔细对比和规则学习的场景。</span>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- 对比表 -->
+  <!-- ================================ -->
+  <div class="tool-section" id="compare">
+    <div class="section-header">
+      <span class="s-icon">📊</span>
+      <h2>五工具对比</h2>
+    </div>
+    <div style="overflow-x:auto;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>⏱ 时间戳</th>
+          <th>🔗 替代URL</th>
+          <th>📄 PDF Finder</th>
+          <th>🕐 发布时间</th>
+          <th>🔗 URL归一化</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>使用场景</strong></td>
+          <td>看日志时识别时间戳</td>
+          <td>评估时提取替代URL</td>
+          <td>论文页提取PDF链接</td>
+          <td>文章页提取发布时间</td>
+          <td>清洗追踪参数，归一化URL</td>
+        </tr>
+        <tr>
+          <td><strong>类型</strong></td>
+          <td><span class="check">Bookmarklet</span></td>
+          <td><span class="check">Bookmarklet</span></td>
+          <td><span class="check">Bookmarklet</span></td>
+          <td><span class="check">Bookmarklet</span></td>
+          <td><span class="check">Bookmarklet</span></td>
+          <td style="background:#ede9fe;color:#6d28d9;font-weight:600">网页工具</td>
+        </tr>
+        <tr>
+          <td><strong>触发方式</strong></td>
+          <td>点书签启用 → 选中弹气泡</td>
+          <td>选中文本 → 点书签 → 浮窗</td>
+          <td>点书签 → 右侧面板</td>
+          <td>点书签 → 浮窗显示PDF</td>
+          <td>点书签 → 右侧面板</td>
+          <td>打开网页 → 输入URL分析</td>
+        </tr>
+        <tr>
+          <td><strong>更新方式</strong></td>
+          <td>GitHub Pages 远程加载</td>
+          <td>CDN数据 + Pages远程加载</td>
+          <td>GitHub Pages 远程加载</td>
+          <td colspan="2" style="text-align:center"><span class="check">GitHub Pages 远程加载</span></td>
+          <td><span class="check">GitHub Pages 直接访问</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    内容评测工具中心 · 5个 Bookmarklet（支持 Chrome / Safari / Firefox / Edge）+ 1个网页工具
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- Bookmarklet Scripts -->
+<!-- ================================ -->
+
+<!-- 1) 时间戳转换 Bookmarklet (远程加载) -->
+<script>
+(function() {
+  var BASE = 'https://miawu423-sketch.github.io/tool-hub/';
+  var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'timestamp-converter.js?v="+Date.now();document.body.appendChild(s)})())';
+  document.getElementById('bm-ts').href = 'javascript:' + loader;
+  document.getElementById('bm-ts2').href = 'javascript:' + loader;
+})();
+</script>
+
+<!-- 2) 可替代URL Bookmarklet (远程加载) -->
+<script>
+(function() {
+  var BASE = 'https://miawu423-sketch.github.io/tool-hub/';
+  var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'alternate-url-finder.js?v="+Date.now();document.body.appendChild(s)})())';
+  document.getElementById('bm-au').href = 'javascript:' + loader;
+  document.getElementById('bm-au2').href = 'javascript:' + loader;
+})();
+</script>
+
+<!-- 3) PDF Finder Bookmarklet (远程加载) -->
+<script>
+(function() {
+  var BASE = 'https://miawu423-sketch.github.io/pdf-finder/';
+  var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'pdf-finder.js?v="+Date.now();document.body.appendChild(s)})())';
+  document.getElementById('bm-pf').href = 'javascript:' + loader;
+  document.getElementById('bm-pf2').href = 'javascript:' + loader;
+})();
+</script>
+
+<!-- 4) Publish Time Bookmarklet (远程加载) -->
+<script>
+(function() {
+  var BASE = 'https://miawu423-sketch.github.io/pdf-finder/';
+  var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'publish-time.js?v="+Date.now();document.body.appendChild(s)})())';
+  document.getElementById('bm-pt').href = 'javascript:' + loader;
+  document.getElementById('bm-pt2').href = 'javascript:' + loader;
+})();
+</script>
+
+</body>
+</html>
