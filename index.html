@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>内容评测工具中心 — 五合一工具集</title>
+<title>内容评测工具中心 — 六合一工具集</title>
 <style>
 :root {
   --bg: #f6f7fb;
@@ -152,6 +152,22 @@ a.web-link {
   box-shadow: 0 4px 12px rgba(124,58,247,.3);
   transition: transform .12s;
 }
+a.ext-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #0891b2, #0e7490);
+  box-shadow: 0 4px 12px rgba(8,145,178,.3);
+  transition: transform .12s;
+}
+a.ext-link:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(8,145,178,.4); }
 a.web-link:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(124,58,247,.4); }
 
 /* Detail Sections */
@@ -365,7 +381,7 @@ kbd {
 <!-- Hero -->
 <div class="hero">
   <h1>🛠 内容评测工具中心</h1>
-  <p class="subtitle">五个实用工具，覆盖评测工作全流程</p>
+  <p class="subtitle">六个实用工具，覆盖评测工作全流程：4个书签栏 + 1个网页工具 + 1个浏览器扩展</p>
   <div class="badge-row">
     <span class="badge badge-green">免安装扩展</span>
     <span class="badge badge-blue">拖拽即用</span>
@@ -421,6 +437,18 @@ kbd {
   </div>
 
   <div class="tool-card">
+    <div class="icon">📸</div>
+    <h3>网页内容复制</h3>
+    <p>在网页上框选任意区域，本地 OCR 识别后自动复制到剪贴板，无需切换软件</p>
+    <div class="card-tags">
+      <span class="card-tag" style="background:#dcfce7;color:#166534">浏览器扩展</span>
+      <span class="card-tag" style="background:#dbeafe;color:#1d4ed8">本地OCR</span>
+      <span class="card-tag" style="background:#fce7f3;color:#9d174d">离线可用</span>
+    </div>
+    <a class="ext-link" href="https://github.com/miawu423-sketch/web-ocr-copy" target="_blank">📸 Web OCR Copy →</a>
+  </div>
+
+  <div class="tool-card">
     <div class="icon">🔗</div>
     <h3>URL 智能归一化</h3>
     <p>输入 URL，智能评分每个参数（核心/可选/追踪），生成 4 种归一化方案，iframe 并排预览对比</p>
@@ -439,8 +467,9 @@ kbd {
   <a href="#tool-au">🔗 替代URL</a>
   <a href="#tool-pf">📄 PDF Finder</a>
   <a href="#tool-pt">🕐 发布时间</a>
+  <a href="#tool-ocr">📸 内容复制</a>
   <a href="#tool-un">🔗 URL归一化</a>
-  <a href="#compare">📊 五工具对比</a>
+  <a href="#compare">📊 六工具对比</a>
 </div>
 
 <!-- ================================ -->
@@ -704,7 +733,67 @@ kbd {
   </div>
 
   <!-- ================================ -->
+  <!-- Tool 5: 网页内容复制 -->
+  <div class="tool-section" id="tool-ocr">
+    <div class="section-header">
+      <span class="s-icon">📸</span>
+      <h2>网页内容复制</h2>
+      <span class="ver" style="background:#ccfbf1;color:#0f766e">浏览器扩展</span>
+    </div>
+    <p class="desc">
+      一个 Chrome / Edge 浏览器扩展——在网页上<strong>框选任意区域</strong>，本地 Tesseract.js OCR 引擎自动识别文字并复制到剪贴板。无需截图、无需切换软件、无需网络，<strong>完全离线运行</strong>。
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-item">
+        <strong>✓ 框选即复制</strong>
+        <span class="feat-desc">拖拽框选网页任意区域，松开后自动 OCR 识别并复制，一步到位</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 本地离线 OCR</strong>
+        <span class="feat-desc">使用本地 Tesseract.js（中英文），无需网络，数据不上传</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 三种触发方式</strong>
+        <span class="feat-desc">快捷键 Ctrl+Shift+O / 右键菜单 / 工具栏图标点击</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 识别后编辑</strong>
+        <span class="feat-desc">弹出可编辑浮层，支持去空格/去换行/去标点/半角转全角，撤销栈最多20步</span>
+      </div>
+    </div>
+
+    <div class="install-block">
+      <a class="ext-link" href="https://github.com/miawu423-sketch/web-ocr-copy" target="_blank">📸 下载安装 →</a>
+      <div class="install-hint">← 浏览器扩展，需下载后在 chrome://extensions 加载</div>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin-bottom:8px; font-size:14px;">安装方法</div>
+    <ol class="steps">
+      <li><strong>下载代码</strong>：点击上方按钮进入 GitHub，<code>Code → Download ZIP</code></li>
+      <li><strong>解压文件</strong>：将 ZIP 解压到本地文件夹</li>
+      <li><strong>打开扩展页面</strong>：Chrome/Edge 地址栏输入 <code>chrome://extensions</code></li>
+      <li><strong>开启开发者模式</strong>：右上角打开「开发者模式」开关</li>
+      <li><strong>加载扩展</strong>：点击「加载已解压的扩展程序」，选择解压后的文件夹</li>
+    </ol>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">适用场景</div>
+    <div class="filter-grid" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">网页禁止复制的文本</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">图片中的文字</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">PDF 预览中的内容</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">嵌入 iframe 的文字</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">会议录制中的文字</div>
+      <div class="filter-item" style="background:#f0fdf4;color:#166534;">任何屏幕上可见的文字</div>
+    </div>
+
+    <div class="install-block" style="margin-top:20px;background:#f0fdf4;">
+      <span style="font-size:14px;color:#0f766e;">💡 这是唯一一个<b>浏览器扩展</b>——需要下载后手动安装，之后在任意网页按 Ctrl+Shift+O 即可框选复制。</span>
+    </div>
+  </div>
+
   <!-- Tool 5: URL 智能归一化 -->
+  <div class="tool-section" id="tool-un">
   <!-- ================================ -->
   <div class="tool-section" id="tool-un">
     <div class="section-header">
@@ -787,7 +876,7 @@ kbd {
   <div class="tool-section" id="compare">
     <div class="section-header">
       <span class="s-icon">📊</span>
-      <h2>五工具对比</h2>
+      <h2>六工具对比</h2>
     </div>
     <div style="overflow-x:auto;">
     <table class="compare-table">
@@ -798,6 +887,7 @@ kbd {
           <th>🔗 替代URL</th>
           <th>📄 PDF Finder</th>
           <th>🕐 发布时间</th>
+          <th>📸 内容复制</th>
           <th>🔗 URL归一化</th>
         </tr>
       </thead>
@@ -808,6 +898,7 @@ kbd {
           <td>评估时提取替代URL</td>
           <td>论文页提取PDF链接</td>
           <td>文章页提取发布时间</td>
+          <td>框选区域OCR复制文字</td>
           <td>清洗追踪参数，归一化URL</td>
         </tr>
         <tr>
@@ -817,6 +908,7 @@ kbd {
           <td><span class="check">Bookmarklet</span></td>
           <td><span class="check">Bookmarklet</span></td>
           <td><span class="check">Bookmarklet</span></td>
+          <td style="background:#ccfbf1;color:#0f766e;font-weight:600">浏览器扩展</td>
           <td style="background:#ede9fe;color:#6d28d9;font-weight:600">网页工具</td>
         </tr>
         <tr>
@@ -826,6 +918,7 @@ kbd {
           <td>点书签 → 右侧面板</td>
           <td>点书签 → 浮窗显示PDF</td>
           <td>点书签 → 右侧面板</td>
+          <td>快捷键/右键 → 框选 → OCR</td>
           <td>打开网页 → 输入URL分析</td>
         </tr>
         <tr>
