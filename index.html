@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>内容评测工具中心 — 六合一工具集</title>
+<title>内容评测工具中心 — 七合一工具集</title>
 <style>
 :root {
   --bg: #f6f7fb;
@@ -135,6 +135,7 @@ a.bm-btn.au { color: #fff; background: linear-gradient(135deg, var(--au-primary)
 a.bm-btn.pf { color: #fff; background: linear-gradient(135deg, #0071e3, #0060c0); }
 a.bm-btn.pt { color: #fff; background: linear-gradient(135deg, #2db84d, #1a9e36); }
 a.bm-btn.un { color: #fff; background: linear-gradient(135deg, #7c3af7, #6d28d9); }
+a.bm-btn.rh { color: #fff; background: linear-gradient(135deg, #D85A30, #C04A20); }
 
 /* Web tool link button (non-bookmarklet) */
 a.web-link {
@@ -381,7 +382,7 @@ kbd {
 <!-- Hero -->
 <div class="hero">
   <h1>🛠 内容评测工具中心</h1>
-  <p class="subtitle">六个实用工具，覆盖评测工作全流程：4个书签栏 + 1个网页工具 + 1个浏览器扩展</p>
+  <p class="subtitle">七个实用工具，覆盖评测工作全流程：5个书签栏 + 1个网页工具 + 1个浏览器扩展</p>
   <div class="badge-row">
     <span class="badge badge-green">免安装扩展</span>
     <span class="badge badge-blue">拖拽即用</span>
@@ -437,6 +438,17 @@ kbd {
   </div>
 
   <div class="tool-card">
+    <div class="icon">⛓️</div>
+    <h3>复制 href 原文</h3>
+    <p>一键复制链接在 HTML 里的原始 href，不做补斜杠、不做百分号转义</p>
+    <div class="card-tags">
+      <span class="card-tag" style="background:#ede9fe;color:#6d28d9">Bookmarklet</span>
+      <span class="card-tag" style="background:#ffedd5;color:#9a3412">逐字节原文</span>
+    </div>
+    <a class="bm-btn rh" id="bm-rh" href="#">⛓ 复制href原文</a>
+  </div>
+
+  <div class="tool-card">
     <div class="icon">📸</div>
     <h3>网页内容复制</h3>
     <p>在网页上框选任意区域，本地 OCR 识别后自动复制到剪贴板，无需切换软件</p>
@@ -467,9 +479,10 @@ kbd {
   <a href="#tool-au">🔗 替代URL</a>
   <a href="#tool-pf">📄 PDF Finder</a>
   <a href="#tool-pt">🕐 发布时间</a>
+  <a href="#tool-rh">⛓ 复制href</a>
   <a href="#tool-ocr">📸 内容复制</a>
   <a href="#tool-un">🔗 URL归一化</a>
-  <a href="#compare">📊 六工具对比</a>
+  <a href="#compare">📊 七工具对比</a>
 </div>
 
 <!-- ================================ -->
@@ -733,7 +746,67 @@ kbd {
   </div>
 
   <!-- ================================ -->
-  <!-- Tool 5: 网页内容复制 -->
+  <!-- Tool 5: 复制 href 原文 -->
+  <div class="tool-section" id="tool-rh">
+    <div class="section-header">
+      <span class="s-icon">⛓️</span>
+      <h2>复制 href 原文</h2>
+      <span class="ver" style="background:#ffedd5;color:#9a3412">Bookmarklet</span>
+    </div>
+    <p class="desc">
+      浏览器右键「复制链接地址」返回的是 <strong>URL 规范化后的结果</strong>（补斜杠、百分号转义、相对路径转绝对），不是 HTML 里的原始 <code>href</code>。这个工具读 <code>getAttribute('href')</code>，<strong>逐字节返回原文</strong>，绕过规范化。
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-item">
+        <strong>✓ 逐字节原文</strong>
+        <span class="feat-desc">不补 <code>/</code>、不转义空格/中文、不解析相对路径，拿到 HTML 里写的原始值</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 点击即复制</strong>
+        <span class="feat-desc">激活后点任意链接，原始 href 直接进剪贴板，悬停有橙色高亮提示</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 复制全部</strong>
+        <span class="feat-desc">一键把整页链接按行导出，自动去重</span>
+      </div>
+      <div class="feat-item">
+        <strong>✓ 不干扰浏览</strong>
+        <span class="feat-desc">激活期间点击不跳转，Esc 退出后恢复；再次点击书签即可关闭</span>
+      </div>
+    </div>
+
+    <div class="install-block">
+      <a class="bm-btn rh" id="bm-rh2" href="#">⛓ 复制href原文</a>
+      <div class="install-hint">← 拖到书签栏即可安装，自动获取最新版本</div>
+    </div>
+
+    <div style="font-weight:600; color:#333; margin-bottom:8px; font-size:14px;">使用方法</div>
+    <ol class="steps">
+      <li><strong>点击书签</strong>：点书签栏的「⛓ 复制href原文」，页面底部出现工具条</li>
+      <li><strong>点任意链接</strong>：原始 href 进剪贴板（激活期间不会跳转）</li>
+      <li><strong>复制全部</strong>：点工具条的「复制全部」，整页链接按行导出</li>
+      <li><strong>退出</strong>：按 Esc 或点「退出」按钮</li>
+    </ol>
+
+    <div style="font-weight:600; color:#333; margin:16px 0 8px; font-size:14px;">为什么需要它</div>
+    <div style="overflow-x:auto;">
+    <table class="compare-table">
+      <tr><th>HTML 原文</th><th>右键复制得到</th><th>规则</th></tr>
+      <tr><td><code>https://a.io?x=1</code></td><td><code>https://a.io/?x=1</code></td><td>空路径补斜杠 <code>/</code></td></tr>
+      <tr><td><code>https://a.io/a b</code></td><td><code>https://a.io/a%20b</code></td><td>空格百分号编码</td></tr>
+      <tr><td><code>https://a.io/x?q=中文</code></td><td><code>...?q=%E4%B8%AD%E6%96%87</code></td><td>非 ASCII 编码</td></tr>
+      <tr><td><code>../page.html</code></td><td><code>https://host/dir/page.html</code></td><td>相对路径解析为绝对</td></tr>
+    </table>
+    </div>
+
+    <div class="install-block" style="margin-top:20px;background:#fff7ed;">
+      <span style="font-size:14px;color:#9a3412;">💡 DevTools 元素面板显示的是属性原文，右键复制取的是 <code>a.href</code>（规范化后的 IDL 属性）——两者本就是不同值，不是系统 bug。</span>
+    </div>
+  </div>
+
+  <!-- ================================ -->
+  <!-- Tool 6: 网页内容复制 -->
   <div class="tool-section" id="tool-ocr">
     <div class="section-header">
       <span class="s-icon">📸</span>
@@ -793,9 +866,7 @@ kbd {
     </div>
   </div>
 
-  <!-- Tool 5: URL 智能归一化 -->
-  <div class="tool-section" id="tool-un">
-  <!-- ================================ -->
+  <!-- Tool 7: URL 智能归一化 -->
   <div class="tool-section" id="tool-un">
     <div class="section-header">
       <span class="s-icon">🔗</span>
@@ -877,7 +948,7 @@ kbd {
   <div class="tool-section" id="compare">
     <div class="section-header">
       <span class="s-icon">📊</span>
-      <h2>六工具对比</h2>
+      <h2>七工具对比</h2>
     </div>
     <div style="overflow-x:auto;">
     <table class="compare-table">
@@ -888,6 +959,7 @@ kbd {
           <th>🔗 替代URL</th>
           <th>📄 PDF Finder</th>
           <th>🕐 发布时间</th>
+          <th>⛓ 复制href</th>
           <th>📸 内容复制</th>
           <th>🔗 URL归一化</th>
         </tr>
@@ -899,6 +971,7 @@ kbd {
           <td>评估时提取替代URL</td>
           <td>论文页提取PDF链接</td>
           <td>文章页提取发布时间</td>
+          <td>复制链接 href 原文</td>
           <td>框选区域OCR复制文字</td>
           <td>清洗追踪参数，归一化URL</td>
         </tr>
@@ -917,26 +990,26 @@ kbd {
           <td>点书签启用 → 选中弹气泡</td>
           <td>选中文本 → 点书签 → 浮窗</td>
           <td>点书签 → 右侧面板</td>
-          <td>点书签 → 浮窗显示PDF</td>
           <td>点书签 → 右侧面板</td>
+          <td>点书签 → 点链接复制</td>
           <td>快捷键/右键 → 框选 → OCR</td>
           <td>打开网页 → 输入URL分析</td>
         </tr>
         <tr>
           <td><strong>更新方式</strong></td>
-          <td>GitHub Pages 远程加载</td>
-          <td>CDN数据 + Pages远程加载</td>
-          <td>GitHub Pages 远程加载</td>
-          <td colspan="2" style="text-align:center"><span class="check">GitHub Pages 远程加载</span></td>
-          <td><span class="check">GitHub Pages 直接访问</span></td>
+          <td>Pages 远程加载</td>
+          <td>Pages 远程加载</td>
+          <td>Pages 远程加载</td>
+          <td>Pages 远程加载</td>
+          <td>Pages 远程加载</td>
+          <td>下载 ZIP 覆盖</td>
+          <td>Pages 直接访问</td>
         </tr>
       </tbody>
     </table>
-    </div>
-  </div>
 
   <div class="footer">
-    内容评测工具中心 · 5个 Bookmarklet（支持 Chrome / Safari / Firefox / Edge）+ 1个网页工具
+    内容评测工具中心 · 5个 Bookmarklet（支持 Chrome / Safari / Firefox / Edge）+ 1个网页工具 + 1个浏览器扩展
   </div>
 </div>
 
@@ -974,7 +1047,17 @@ kbd {
 })();
 </script>
 
-<!-- 4) Publish Time Bookmarklet (远程加载) -->
+
+<!-- 4) 复制href原文 Bookmarklet (远程加载) -->
+<script>
+(function() {
+  var BASE = 'https://miawu423-sketch.github.io/raw-href-tool/';
+  var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'src.js?v="+Date.now();document.body.appendChild(s)})())';
+  document.getElementById('bm-rh').href = 'javascript:' + loader;
+  document.getElementById('bm-rh2').href = 'javascript:' + loader;
+})();
+</script>
+<!-- 5) Publish Time Bookmarklet (远程加载) -->
 <script>
 (function() {
   var BASE = 'https://miawu423-sketch.github.io/pdf-finder/';
