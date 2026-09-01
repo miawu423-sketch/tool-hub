@@ -1020,8 +1020,8 @@ kbd {
 <!-- 1) 时间戳转换 Bookmarklet (远程加载) -->
 <script>
 (function() {
-  var BASE = 'https://miawu423-sketch.github.io/tool-hub/';
-  var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'timestamp-converter.js?v="+Date.now();document.body.appendChild(s)})())';
+  var BASE = 'https://miawu423-sketch.github.io/timestamp-converter/timestamp-bookmarklet/';
+  var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'src.js?v="+Date.now();document.body.appendChild(s)})())';
   document.getElementById('bm-ts').href = 'javascript:' + loader;
   document.getElementById('bm-ts2').href = 'javascript:' + loader;
 })();
@@ -1030,7 +1030,7 @@ kbd {
 <!-- 2) 可替代URL Bookmarklet (远程加载) -->
 <script>
 (function() {
-  var BASE = 'https://miawu423-sketch.github.io/tool-hub/';
+  var BASE = 'https://miawu423-sketch.github.io/alternate-url-finder/';
   var loader = 'void((function(){var s=document.createElement("script");s.src="'+BASE+'alternate-url-finder.js?v="+Date.now();document.body.appendChild(s)})())';
   document.getElementById('bm-au').href = 'javascript:' + loader;
   document.getElementById('bm-au2').href = 'javascript:' + loader;
